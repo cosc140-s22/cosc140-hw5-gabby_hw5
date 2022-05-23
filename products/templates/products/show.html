@@ -6,6 +6,16 @@
     <dt>Description</dt><dd>{{product.description}}</dd>
     <dt>Ages</dt><dd>{{product.age_range}}</dd>
     <dt>Price</dt><dd>{{product.price}}</dd>
+    <dt>Images</dt>
+        {% for img in product.productimage_set.all%}
+          {% if img %}
+            <img class="img_gallery" src="{{img.image.url}}"
+              {% if img.caption %}
+                alt="{{img.caption}}"
+              {% endif %}
+              />
+          {% endif %}
+        {% endfor %}
 </dl>
 {% endblock %}
 

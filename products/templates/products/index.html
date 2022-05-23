@@ -11,14 +11,25 @@
 {% block content %}
 <table class="table">
     <thead>
-        <th>Name
+        <th>Image
+        <th><a href="{% url 'index' %}?sort=name">Name</a>
         <th>Description
-        <th>Ages
-        <th>Price
+        <th><a href="{% url 'index' %}?sort=ages">Ages</a>
+        <th><a href="{% url 'index' %}?sort=price">Price</a>
     </thead>
     <tbody>
 {% for p in products %}
     <tr>
+      {% with img=p.random_image %}
+        <td>
+          {% if img %}
+          <img class="thumbnail" src="{{img.image.url}}"
+            {% if img.caption %}
+              alt="{{img.caption}}"
+            {% endif %}
+          />
+          {% endif %}
+      {% endwith %} 
         <td><a href="{% url 'show' p.id %}">{{ p.name }}</a>
         <td>{{ p.description|truncatewords:5 }}
         <td class="right">{{ p.age_range }}
